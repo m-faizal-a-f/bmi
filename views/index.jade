@@ -1,0 +1,80 @@
+extends layout
+
+block content
+	h1(style='text-align:center')
+		a(href='#{baseUrl}', style='text-decoration:none;')= title
+	p
+		center By : Mokhamad Faizal Ali Fahmi 
+			b ( 17083000083 / 8B )
+	form(action='/calculate', method='post')
+		input(type='text', name='txt_berat', placeholder='Berat Badan (Kg)')
+		input(type='text', name='txt_tinggi', placeholder='Tinggi Badan (Cm)')
+		button(type='submit', name='btn_submit') HITUNG BMI
+	- if (typeof(result) !== 'undefined'){
+		- if (berat > 0 && tinggi > 0){
+			div(class='result')
+				h3(style='text-align:center;') Hasil : 
+					b(style='color:#{color}') #{kategori}
+				p
+				table(class='tb-detail')
+					tr
+						td Berat
+						td :
+						td #{berat} Kg
+					tr
+						td Tinggi
+						td :
+						td #{tinggi} Cm
+					tr
+						td BMI
+						td :
+						td #{bmi} Kg/m2
+				p
+				div
+					table(class='tb-bmi')
+						tr
+							td
+								div(style='margin-left:#{bmi-2}%')= bmi
+									br
+									img(src='http://localhost:3000/images/arrow-down.png')
+						tr
+							td
+								img(src='http://localhost:3000/images/bmi-adult.png')
+			div(class='parameter')
+				ul(style='padding:0 15px;display: table;')
+					li Healthy BMI range: 18.5 kg/m2 - 25 kg/m2
+					li Healthy weight for the height: 47.4 kgs - 64.0 kgs
+					li Gain 2.4 kgs to reach a BMI of 18.5 kg/m2.
+					li Ponderal Index: 11 kg/m3
+				table(class='tb-kategori')
+					tr
+						th Kategori
+						th BMI range - kg/m2
+					tr
+						td Kurus Parah
+						td < 16
+					tr
+						td Kurus Sedang
+						td 16 - 17
+					tr
+						td Sedikit Kurus
+						td 17 - 18.5
+					tr
+						td Normal
+						td 18.5 - 25
+					tr
+						td Kegemukan
+						td 25 - 30
+					tr
+						td Obesitas Kelas I
+						td 30 - 35
+					tr
+						td Obesitas Kelas II
+						td 35 - 40
+					tr
+						td Obesitas Kelas III
+						td > 40
+		- } else {
+			p Nilai tinggi dan berat badan harus lebih dari 0
+		-}
+	-}
